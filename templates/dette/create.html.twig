@@ -1,0 +1,35 @@
+{# templates/dette/create.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une Dette{% endblock %}
+
+{% block body %}
+    <h1>Créer une Dette</h1>
+
+    <form method="post" action="{{ path('create_dette') }}">
+        <div>
+            <label for="client_id">Client :</label>
+            <select name="client_id" id="client_id" required>
+                {% for client in clients %}
+                    <option value="{{ client.id }}">{{ client.surname }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="montant">Montant :</label>
+            <input type="number" name="montant" id="montant" required>
+        </div>
+
+        <div>
+            <label for="articles">Articles :</label>
+            <select name="articles[]" id="articles" multiple required>
+                {% for article in articles %}
+                    <option value="{{ article.id }}">{{ article.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit">Créer la Dette</button>
+    </form>
+{% endblock %}

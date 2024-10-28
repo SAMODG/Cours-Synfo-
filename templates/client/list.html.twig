@@ -1,0 +1,50 @@
+{# templates/client/list.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Clients{% endblock %}
+
+{% block body %}
+    <h1>Liste des Clients</h1>
+
+    <form method="get" action="{{ path('client_list') }}">
+        <div>
+            <label for="surname">Nom:</label>
+            <input type="text" name="surname" id="surname" value="{{ app.request.query.get('surname') }}">
+        </div>
+        <div>
+            <label for="telephone">Téléphone:</label>
+            <input type="text" name="telephone" id="telephone" value="{{ app.request.query.get('telephone') }}">
+        </div>
+        <button type="submit">Filtrer</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Téléphone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+                <tr>
+                    <td>{{ client.surname }}</td>
+                    <td>{{ client.telephone }}</td>
+                    <td>
+                        <a href="{{ path('client_view', { 'id': client.id }) }}">Voir</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucun client trouvé.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {# Pagination #}
+    <div class="pagination">
+        {{ knp_pagination_render(clients) }}
+    </div>
+{% endblock %}

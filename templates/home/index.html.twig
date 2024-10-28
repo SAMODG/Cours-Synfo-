@@ -1,0 +1,20 @@
+{# templates/home/index.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page d'Accueil</title>
+</head>
+<body>
+    <h1>Bienvenue sur la page d'accueil de mon application Symfony</h1>
+    <p>Cliquez sur les liens ci-dessous pour accéder aux différentes fonctionnalités :</p>
+
+    <ul>
+        <li><a href="{{ path('client_list') }}">Liste des clients</a></li>
+        
+       
+        <li><a href="{{ path('create_dette') }}">Créer une nouvelle dette</a></li>
+        {# Si tu veux afficher la liste des dettes pour un client spécifique, remplace 1 par l'ID réel du client #}
+        <li><a href="{{ path('dette_list', {'client': 1}) }}">Liste des dettes pour un client</a></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{# templates/dette/list.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Dettes{% endblock %}
+
+{% block body %}
+    <h1>Liste des Dettes</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Client</th>
+                <th>Date</th>
+                <th>Montant</th>
+                <th>Montant Versé</th>
+                <th>Montant Restant</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dette in dettes %}
+                <tr>
+                    <td>{{ dette.client.surname }}</td>
+                    <td>{{ dette.date|date('d/m/Y') }}</td>
+                    <td>{{ dette.montant }}</td>
+                    <td>{{ dette.montantVerset }}</td>
+                    <td>{{ dette.montantRestant }}</td>
+                    <td>
+                        <a href="{{ path('dette_view', { 'id': dette.id }) }}">Voir</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucune dette trouvée.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
